@@ -14,12 +14,14 @@ router.post('/', function (req, res, next) {
 
 
     let question = new Question();
-    question.id = 3
-    question.question = "هل يجوز اهداء النصارى الهدايا؟";
-    question.humanAnswer = "مستحب";
-    question.botAnswer = "نعم يجوز";
-    question.f1Score = 0;
+    question.id = req.body.id
+    question.question = req.body.question;
+    question.humanAnswer = req.body.humanAnswer;
+    question.botAnswer = req.body.botAnswer;
+    question.f1Score = req.body.f1Score;
     question.save();
+
+    res.send({success: true});
 });
 
 router.get('/random', async function (req, res, next) {

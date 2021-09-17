@@ -1,0 +1,75 @@
+extends layout
+
+block content
+    section(class="py-5 container")
+        div(class="row py-lg-5")
+            div(class="col-lg-6 col-md-8 mx-auto")
+                div(id="question-div" style="display: none;")
+                    div(class="mb-5")
+                        h3(class="mb-3") السؤال:
+                            span(id="questionText")
+                        p(style="font-size: 16pt;") الإجابة:
+                            span(id="answerText")
+                    div(class="d-flex justify-content-around")
+                        button(class="btn btn-outline-primary btn-lg" style="min-width: 160px;" onclick="guess('human')")
+                            i(class="fas fa-user fa-4x d-block")
+                            span إنسان
+                        button(class="btn btn-outline-success btn-lg" style="min-width: 160px;" onclick="guess('bot')")
+                            i(class="fas fa-robot fa-4x d-block")
+                            span روبوت
+                div(class="text-center" id="loading-div")
+                    i(class="fas fa-spinner fa-3x fa-spin")
+
+    script.
+        var currentQuestion = null;
+
+        $(document).ready(function () {
+            getRandomQuestion();
+        });
+
+        let pastQuestions = [];
+
+        function getRandomQuestion() {
+
+            $("#question-div").hide();
+            $("#loading-div").show();
+
+            $.ajax({
+                method: "get",
+                url: "/questions/random",
+                data: {pastQuestions},
+                success: function (response) {
+
+                    if (response.question != null) {
+                        currentQuestion = response.question;
+
+                        pastQuestions.push(currentQuestion.id);
+
+                        $("#questionText").text(currentQuestion.question);
+                        $("#answerText").text(currentQuestion.answer);
+
+                        $("#question-div").show();
+                        $("#loading-div").hide();
+
+                    } else {
+                        alert("انتهت الأسئلة ، شكراً لك.");
+                        $("#loading-div").hide();
+                    }
+                }
+            });
+        }
+
+        function guess(choice) {
+            $("#question-div").hide();
+            $("#loading-div").show();
+
+            $.ajax({
+                method: "post",
+                url: "/questions/guess",
+                data: {question: currentQuestion, guess: choice},
+                success: function (response) {
+                    //
+                    getRandomQuestion();
+                }
+            });
+        }

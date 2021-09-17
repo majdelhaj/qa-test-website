@@ -1,0 +1,45 @@
+doctype html
+html(lang="ar" dir="rtl")
+  head
+    title= title
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.rtl.css')
+    link(rel='stylesheet', href='/stylesheets/fontawesome/all.css')
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+
+  body(class="d-flex flex-column h-100")
+    html.
+      <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 py-4">
+                <h4 class="text-white">عن الموقع</h4>
+                <p class="text-muted">تم بناء هذا الموقع بهدف تقييم روبوت محادثة عربي تم تطويره لأغراض بحثية فقط. يتم عرض عدد من الاسئلة وإجابتها، ونرجو منك التوّقع لكل سؤال، هل الاجابة لشخص حقيقي أم للروبوت. شكراً لمساهمتك في هذه الدراسة.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container">
+            <a href="/" class="navbar-brand d-flex align-items-center">
+              <strong>روبوت محادثة عربي</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="تبديل التنقل">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+    main(class='flex-shrink-0')
+      div(class='container')
+        block content
+
+
+    footer(class="footer mt-auto py-3 bg-light mt-5" style="position: absolute; width: 100%; bottom: 0px;")
+      div(class="container text-center")
+        span(class="text-muted") 2021© مجد الحاج - البريد الالكتروني: majdelhaj@gmail.com
+
+    script(src='/bootstrap/js/bootstrap.js')
